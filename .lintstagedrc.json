@@ -1,0 +1,4 @@
+{
+  "apps/**/*.{ts,tsx,md,scss,html}": ["nx format:write --base master"],
+  "libs/**/*.{ts,tsx,md,scss,html}": ["nx format:write --base master"]
+}
