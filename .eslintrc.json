@@ -46,6 +46,10 @@
                 "onlyDependOnLibsWithTags": ["platform:db"]
               },
               {
+                "sourceTag": "platform:server",
+                "onlyDependOnLibsWithTags": ["platform:server", "platform:db"]
+              },
+              {
                 "sourceTag": "platform:web",
                 "onlyDependOnLibsWithTags": [
                   "platform:cross-platform",
