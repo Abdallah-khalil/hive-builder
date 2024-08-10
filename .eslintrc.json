@@ -13,8 +13,55 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": [
+                  "type:feature",
+                  "type:ui",
+                  "type:util",
+                  "type:data-access"
+                ]
+              },
+              {
+                "sourceTag": "type:ui",
+                "onlyDependOnLibsWithTags": [
+                  "type:ui",
+                  "type:util",
+                  "type:data-access"
+                ]
+              },
+              {
+                "sourceTag": "type:data-access",
+                "onlyDependOnLibsWithTags": ["type:data-access", "type:util"]
+              },
+              {
+                "sourceTag": "type:util",
+                "onlyDependOnLibsWithTags": ["type:util"]
+              },
+              {
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "platform:db",
+                "onlyDependOnLibsWithTags": ["platform:db"]
+              },
+              {
+                "sourceTag": "platform:web",
+                "onlyDependOnLibsWithTags": [
+                  "platform:cross-platform",
+                  "platform:web"
+                ]
+              },
+              {
+                "sourceTag": "platform:cross-platform",
+                "onlyDependOnLibsWithTags": ["platform:cross-platform"]
+              },
+              {
+                "sourceTag": "platform:mobile",
+                "onlyDependOnLibsWithTags": [
+                  "platform:mobile",
+                  "platform:cross-platform"
+                ]
               }
             ]
           }

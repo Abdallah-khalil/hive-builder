@@ -1,0 +1,19 @@
+{
+  "name": "hive-db",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/hive-db/src",
+  "projectType": "library",
+  "tags": ["platform:db", "scope:shared", "type:data"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/hive-db",
+        "main": "libs/hive-db/src/index.ts",
+        "tsConfig": "libs/hive-db/tsconfig.lib.json",
+        "assets": ["libs/hive-db/*.md"]
+      }
+    }
+  }
+}

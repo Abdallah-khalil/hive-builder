@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@hive-builder/hive-db": ["libs/hive-db/src/index.ts"],
+      "@spartan-ng/ui-typography-helm": [
+        "libs/shared/web-ui/ui-typography-helm/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
