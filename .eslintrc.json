@@ -70,8 +70,40 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nx/typescript"],
-      "rules": {}
+      "extends": [
+        "plugin:@nx/typescript",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "rules": {
+        "@typescript-eslint/strict-boolean-expressions": "error",
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/explicit-function-return-type": "error",
+        "@angular-eslint/no-output-native": "error",
+        "@angular-eslint/no-input-rename": "error",
+        "rxjs/no-unsafe-takeuntil": "error",
+        "rxjs/no-ignored-observable": "error",
+        "rxjs/no-exposed-subjects": "error",
+        "rxjs/no-unsafe-catch": "error",
+        "@angular-eslint/control-flow-syntax": "error",
+        "@typescript-eslint/explicit-member-accessibility": [
+          "error",
+          { "accessibility": "explicit" }
+        ],
+        "@typescript-eslint/no-public": "error",
+        "@typescript-eslint/consistent-type-definitions": [
+          "error",
+          "interface"
+        ],
+        "@typescript-eslint/consistent-type-assertions": "error",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          { "argsIgnorePattern": "^_" }
+        ],
+        "@angular-eslint/no-host-metadata-property": "error",
+        "@angular-eslint/no-inputs-metadata-property": "error",
+        "@typescript-eslint/no-misused-new": "error",
+        "import/order": ["error", { "newlines-between": "always" }]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],
