@@ -120,7 +120,6 @@
         "@typescript-eslint/no-dynamic-delete": "error",
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/no-empty-interface": "warn",
-        "@typescript-eslint/no-explicit-any": "error",
         "@typescript-eslint/no-floating-promises": ["error"],
         "no-magic-numbers": "off",
         "@typescript-eslint/no-magic-numbers": [
@@ -202,7 +201,8 @@
             "caseSensitive": false,
             "natural": true
           }
-        ]
+        ],
+        "@typescript-eslint/no-explicit-any": ["error"]
       }
     },
     {

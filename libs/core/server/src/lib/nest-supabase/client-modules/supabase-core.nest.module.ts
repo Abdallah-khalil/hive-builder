@@ -27,7 +27,7 @@ export class SupabaseCoreModule {
   }
 
   public static forRootAsync(
-    nestSupabaseConfigAsync: NestSupabaseConfigAsync
+    nestSupabaseConfigAsync: NestSupabaseConfigAsync,
   ): DynamicModule {
     const moduleProviders: Provider[] = [SupabaseCoreProvider];
 

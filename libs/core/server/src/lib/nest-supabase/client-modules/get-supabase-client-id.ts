@@ -2,7 +2,7 @@ import { Inject } from '@nestjs/common';
 import { SupabaseClient } from '@supabase/supabase-js';
 
 export function getSupabaseClientId(
-  clientName?: string
+  clientName?: string,
 ): string | typeof SupabaseClient {
   return clientName !== undefined
     ? `supabase_client_${clientName}`
@@ -10,6 +10,6 @@ export function getSupabaseClientId(
 }
 
 export const injectSupabaseClient: (
-  clientName?: string
+  clientName?: string,
 ) => ParameterDecorator = (clientName?: string): ParameterDecorator =>
   Inject(getSupabaseClientId(clientName));

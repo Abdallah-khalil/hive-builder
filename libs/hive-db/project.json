@@ -28,6 +28,20 @@
         "command": "supabase stop",
         "cwd": "libs/hive-db"
       }
+    },
+    "link": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "supabase link  --project-ref {args.project-ref} ",
+        "cwd": "libs/hive-db"
+      }
+    },
+    "gen:db:types": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx supabase gen types --lang  typescript --linked > src/lib/hive-db.ts",
+        "cwd": "libs/hive-db"
+      }
     }
   }
 }

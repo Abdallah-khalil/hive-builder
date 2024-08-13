@@ -4,7 +4,7 @@ import {
 } from '../models/supabase-config';
 
 export function createNestSupabaseConfigFactory(
-  nestSupabaseConfigFactory: NestSupabaseConfigFactory
+  nestSupabaseConfigFactory: NestSupabaseConfigFactory,
 ): NestSupabaseConfig | Promise<NestSupabaseConfig> {
   return nestSupabaseConfigFactory.createNestSupabaseConfig();
 }

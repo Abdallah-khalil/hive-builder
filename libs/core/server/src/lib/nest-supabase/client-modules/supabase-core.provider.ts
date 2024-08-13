@@ -1,3 +1,4 @@
+import { Database } from '@hive-builder/hive-db';
 import { Inject, Injectable } from '@nestjs/common';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
@@ -14,34 +15,34 @@ export class SupabaseCoreProvider {
 
   public constructor(
     @Inject(SupabaseCoreModuleInjectionSymbols.SUPABASE_CONFIG)
-    nestSupbaseConfig: NestSupabaseConfig
+    nestSupbaseConfig: NestSupabaseConfig,
   ) {
     if (Array.isArray(nestSupbaseConfig)) {
       for (const nameSupabaseConfigPair of nestSupbaseConfig) {
         this.supabaseClients.set(
           nameSupabaseConfigPair.name,
-          createClient(
+          createClient<Database>(
             nameSupabaseConfigPair.supabaseConfig.supabaseUrl,
             nameSupabaseConfigPair.supabaseConfig.supabaseKey,
-            nameSupabaseConfigPair.supabaseConfig.options
-          )
+            nameSupabaseConfigPair.supabaseConfig.options,
+          ),
         );
       }
     } else {
       this.supabaseClients.set(
         DEFAULT_CLIENT,
-        createClient(
+        createClient<Database>(
           nestSupbaseConfig.supabaseUrl,
           nestSupbaseConfig.supabaseKey,
-          nestSupbaseConfig.options
-        )
+          nestSupbaseConfig.options,
+        ),
       );
     }
   }
 
   public getClient(clientName?: string): SupabaseClient {
     const supabaseClient: SupabaseClient | undefined = this.supabaseClients.get(
-      clientName ?? DEFAULT_CLIENT
+      clientName ?? DEFAULT_CLIENT,
     );
 
     if (supabaseClient === undefined) {
