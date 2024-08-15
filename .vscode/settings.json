@@ -5,5 +5,141 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "cSpell.words": ["supabase", "Supbase"]
+  "explorer.confirmDelete": false,
+  "editor.formatOnSave": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/.angular": true,
+    "**/.nx": true,
+    "**/node_modules": true
+  },
+  "typescript.updateImportsOnFileMove.enabled": "never",
+
+  "files.associations": {
+    "*.html": "html"
+  },
+  "[ng-template]": {},
+
+  "window.zoomLevel": 0,
+
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.enableSmartCommit": true,
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "workbench.iconTheme": "material-icon-theme",
+  "material-icon-theme.files.associations": {
+    "**.nest.module.ts": "nest",
+    "**.nest.service.ts": "nest-services",
+    "**.nest.guard.ts": "nest-guards",
+    "**.controller.ts": "nest-controllers",
+    "**.provider.ts": "nest-services",
+    "**.middleware.ts": "nest-middlewares",
+    "**.nest.interceptor.ts": "nest-middlewares",
+    "**.filter.ts": "nest-filters"
+  },
+  "material-icon-theme.files.customClones": [
+    {
+      "name": "nest-controllers",
+      "base": "nest",
+      "color": "#1b88d1",
+      "fileExtensions": ["controller.ts"]
+    },
+    {
+      "name": "nest-resolvers",
+      "base": "nest",
+      "color": "#1b88d1",
+      "fileExtensions": ["nest.resolver.ts"]
+    },
+    {
+      "name": "nest-modules",
+      "base": "nest",
+      "color": "#e53935",
+      "fileExtensions": ["nest.module.ts"]
+    },
+    {
+      "name": "nest-services",
+      "base": "nest",
+      "color": "#fdca27",
+      "fileExtensions": ["nest.service.ts"]
+    },
+    {
+      "name": "nest-middleware",
+      "base": "nest",
+      "color": "#5c6bc0",
+      "fileExtensions": ["middleware.ts"]
+    },
+    {
+      "name": "nest-filters",
+      "base": "nest",
+      "color": "#fb7042",
+      "fileExtensions": ["filter.ts"]
+    },
+    {
+      "name": "nest-pipes",
+      "base": "nest",
+      "color": "#1a897b",
+      "fileExtensions": ["nest.pipe.ts"]
+    },
+    {
+      "name": "nest-gateway",
+      "base": "nest",
+      "color": "#afb42b",
+      "fileExtensions": ["gateway.ts"]
+    },
+    {
+      "name": "nest-guard",
+      "base": "nest",
+      "color": "#43a047",
+      "fileExtensions": ["nest.guard.ts"]
+    },
+    {
+      "name": "nest-cli",
+      "base": "nest",
+      "color": "#ea2845",
+      "fileExtensions": ["nest-cli.json"]
+    },
+    {
+      "name": "nest-decorator",
+      "base": "nest",
+      "color": "#ab47bc",
+      "fileExtensions": ["decorator.ts"]
+    },
+    {
+      "name": "graphql-queries",
+      "base": "graphql",
+      "color": "#e63dae",
+      "fileExtensions": ["queries.ts", "graphql"]
+    }
+  ],
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "angular.enable-strict-mode-prompt": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit",
+    "source.sortMembers": "explicit"
+  },
+
+  "cSpell.words": ["supabase", "Supbase"],
+  "editor.inlineSuggest.showToolbar": "always"
 }
