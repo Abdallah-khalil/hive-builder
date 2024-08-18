@@ -1,4 +1,4 @@
-import { Database } from '@hive-builder/hive-db';
+import { HiveDatabase } from '@hive-builder/hive-db';
 import { Inject, Injectable } from '@nestjs/common';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
@@ -21,7 +21,7 @@ export class SupabaseCoreProvider {
       for (const nameSupabaseConfigPair of nestSupbaseConfig) {
         this.supabaseClients.set(
           nameSupabaseConfigPair.name,
-          createClient<Database>(
+          createClient<HiveDatabase>(
             nameSupabaseConfigPair.supabaseConfig.supabaseUrl,
             nameSupabaseConfigPair.supabaseConfig.supabaseKey,
             nameSupabaseConfigPair.supabaseConfig.options,
@@ -31,7 +31,7 @@ export class SupabaseCoreProvider {
     } else {
       this.supabaseClients.set(
         DEFAULT_CLIENT,
-        createClient<Database>(
+        createClient<HiveDatabase>(
           nestSupbaseConfig.supabaseUrl,
           nestSupbaseConfig.supabaseKey,
           nestSupbaseConfig.options,

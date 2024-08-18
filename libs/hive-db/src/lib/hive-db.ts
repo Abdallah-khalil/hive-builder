@@ -8,7 +8,7 @@ export type Json =
   | Json[];
 
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-export type Database = {
+export type HiveDatabase = {
   graphql_public: {
     Tables: {
       [_ in never]: never;
@@ -65,12 +65,14 @@ export type Database = {
           currency: string | null;
           description: string | null;
           id: string;
-          interval: Database['public']['Enums']['pricing_plan_interval'] | null;
+          interval:
+            | HiveDatabase['public']['Enums']['pricing_plan_interval']
+            | null;
           interval_count: number | null;
           metadata: Json | null;
           product_id: string | null;
           trial_period_days: number | null;
-          type: Database['public']['Enums']['pricing_type'] | null;
+          type: HiveDatabase['public']['Enums']['pricing_type'] | null;
           unit_amount: number | null;
         };
         Insert: {
@@ -79,13 +81,13 @@ export type Database = {
           description?: string | null;
           id: string;
           interval?:
-            | Database['public']['Enums']['pricing_plan_interval']
+            | HiveDatabase['public']['Enums']['pricing_plan_interval']
             | null;
           interval_count?: number | null;
           metadata?: Json | null;
           product_id?: string | null;
           trial_period_days?: number | null;
-          type?: Database['public']['Enums']['pricing_type'] | null;
+          type?: HiveDatabase['public']['Enums']['pricing_type'] | null;
           unit_amount?: number | null;
         };
         Update: {
@@ -94,13 +96,13 @@ export type Database = {
           description?: string | null;
           id?: string;
           interval?:
-            | Database['public']['Enums']['pricing_plan_interval']
+            | HiveDatabase['public']['Enums']['pricing_plan_interval']
             | null;
           interval_count?: number | null;
           metadata?: Json | null;
           product_id?: string | null;
           trial_period_days?: number | null;
-          type?: Database['public']['Enums']['pricing_type'] | null;
+          type?: HiveDatabase['public']['Enums']['pricing_type'] | null;
           unit_amount?: number | null;
         };
         Relationships: [
@@ -153,7 +155,7 @@ export type Database = {
           metadata: Json | null;
           price_id: string | null;
           quantity: number | null;
-          status: Database['public']['Enums']['subscription_status'] | null;
+          status: HiveDatabase['public']['Enums']['subscription_status'] | null;
           trial_end: string | null;
           trial_start: string | null;
           user_id: string;
@@ -170,7 +172,9 @@ export type Database = {
           metadata?: Json | null;
           price_id?: string | null;
           quantity?: number | null;
-          status?: Database['public']['Enums']['subscription_status'] | null;
+          status?:
+            | HiveDatabase['public']['Enums']['subscription_status']
+            | null;
           trial_end?: string | null;
           trial_start?: string | null;
           user_id: string;
@@ -187,7 +191,9 @@ export type Database = {
           metadata?: Json | null;
           price_id?: string | null;
           quantity?: number | null;
-          status?: Database['public']['Enums']['subscription_status'] | null;
+          status?:
+            | HiveDatabase['public']['Enums']['subscription_status']
+            | null;
           trial_end?: string | null;
           trial_start?: string | null;
           user_id?: string;
@@ -267,19 +273,21 @@ export type Database = {
   };
 };
 
-type PublicSchema = Database[Extract<keyof Database, 'public'>];
+type PublicSchema = HiveDatabase[Extract<keyof HiveDatabase, 'public'>];
 
 export type Tables<
   PublicTableNameOrOptions extends
     | keyof (PublicSchema['Tables'] & PublicSchema['Views'])
-    | { schema: keyof Database },
-  TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof (Database[PublicTableNameOrOptions['schema']]['Tables'] &
-        Database[PublicTableNameOrOptions['schema']]['Views'])
+    | { schema: keyof HiveDatabase },
+  TableName extends PublicTableNameOrOptions extends {
+    schema: keyof HiveDatabase;
+  }
+    ? keyof (HiveDatabase[PublicTableNameOrOptions['schema']]['Tables'] &
+        HiveDatabase[PublicTableNameOrOptions['schema']]['Views'])
     : never = never,
-> = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? (Database[PublicTableNameOrOptions['schema']]['Tables'] &
-      Database[PublicTableNameOrOptions['schema']]['Views'])[TableName] extends {
+> = PublicTableNameOrOptions extends { schema: keyof HiveDatabase }
+  ? (HiveDatabase[PublicTableNameOrOptions['schema']]['Tables'] &
+      HiveDatabase[PublicTableNameOrOptions['schema']]['Views'])[TableName] extends {
       Row: infer R;
     }
     ? R
@@ -297,12 +305,14 @@ export type Tables<
 export type TablesInsert<
   PublicTableNameOrOptions extends
     | keyof PublicSchema['Tables']
-    | { schema: keyof Database },
-  TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
+    | { schema: keyof HiveDatabase },
+  TableName extends PublicTableNameOrOptions extends {
+    schema: keyof HiveDatabase;
+  }
+    ? keyof HiveDatabase[PublicTableNameOrOptions['schema']]['Tables']
     : never = never,
-> = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
+> = PublicTableNameOrOptions extends { schema: keyof HiveDatabase }
+  ? HiveDatabase[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
       Insert: infer I;
     }
     ? I
@@ -318,12 +328,14 @@ export type TablesInsert<
 export type TablesUpdate<
   PublicTableNameOrOptions extends
     | keyof PublicSchema['Tables']
-    | { schema: keyof Database },
-  TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicTableNameOrOptions['schema']]['Tables']
+    | { schema: keyof HiveDatabase },
+  TableName extends PublicTableNameOrOptions extends {
+    schema: keyof HiveDatabase;
+  }
+    ? keyof HiveDatabase[PublicTableNameOrOptions['schema']]['Tables']
     : never = never,
-> = PublicTableNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
+> = PublicTableNameOrOptions extends { schema: keyof HiveDatabase }
+  ? HiveDatabase[PublicTableNameOrOptions['schema']]['Tables'][TableName] extends {
       Update: infer U;
     }
     ? U
@@ -339,12 +351,14 @@ export type TablesUpdate<
 export type Enums<
   PublicEnumNameOrOptions extends
     | keyof PublicSchema['Enums']
-    | { schema: keyof Database },
-  EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
-    ? keyof Database[PublicEnumNameOrOptions['schema']]['Enums']
+    | { schema: keyof HiveDatabase },
+  EnumName extends PublicEnumNameOrOptions extends {
+    schema: keyof HiveDatabase;
+  }
+    ? keyof HiveDatabase[PublicEnumNameOrOptions['schema']]['Enums']
     : never = never,
-> = PublicEnumNameOrOptions extends { schema: keyof Database }
-  ? Database[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
+> = PublicEnumNameOrOptions extends { schema: keyof HiveDatabase }
+  ? HiveDatabase[PublicEnumNameOrOptions['schema']]['Enums'][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema['Enums']
   ? PublicSchema['Enums'][PublicEnumNameOrOptions]
   : never;

@@ -5,6 +5,7 @@ import { UserResolver } from './user.nest.resolver';
 import { UserService } from './user.nest.service';
 
 @Module({
+  exports: [UserService],
   imports: [SupabaseNestModule.injectClient()],
   providers: [UserResolver, UserService],
 })

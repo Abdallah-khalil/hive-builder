@@ -169,23 +169,8 @@
           {
             "alphabetize": {
               "order": "asc",
-              "caseInsensitive": true
-            },
-            "groups": ["builtin", "external"],
-            "newlines-between": "always",
-            "pathGroups": [
-              {
-                "pattern": "@jest/globals",
-                "group": "external",
-                "position": "before"
-              },
-              {
-                "pattern": "jest-mock",
-                "group": "external",
-                "position": "before"
-              }
-            ],
-            "pathGroupsExcludedImportTypes": ["@jest/globals", "jest-mock"]
+              "caseInsensitive": false
+            }
           }
         ],
         "@typescript-eslint/strict-boolean-expressions": "error",

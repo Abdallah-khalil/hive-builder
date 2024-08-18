@@ -1,13 +1,13 @@
 import { DynamicModule, Global, Module, Provider } from '@nestjs/common';
 
-import { createNestSupabaseConfigFactory } from './create-supabase-config';
-import { SupabaseCoreProvider } from './supabase-core.provider';
 import {
   isNestSupabaseConfigFactoryAsyncOptions,
   NestSupabaseConfig,
   NestSupabaseConfigAsync,
   SupabaseCoreModuleInjectionSymbols,
 } from '../models/supabase-config';
+import { createNestSupabaseConfigFactory } from './create-supabase-config';
+import { SupabaseCoreProvider } from './supabase-core.provider';
 
 @Global()
 @Module({})
