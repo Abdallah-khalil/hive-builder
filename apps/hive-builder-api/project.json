@@ -11,7 +11,9 @@
       "dependsOn": ["build"],
       "options": {
         "buildTarget": "hive-builder-api:build",
-        "runBuildTargetDependencies": false
+        "runBuildTargetDependencies": false,
+        "watch": true,
+        "inspect": false
       },
       "configurations": {
         "development": {

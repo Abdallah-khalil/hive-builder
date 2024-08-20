@@ -1,8 +1,7 @@
-import { HiveDatabase } from '@hive-builder/hive-db';
+import { HiveDatabase, Tables, TablesInsert } from '@hive-builder/hive-db';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
-import { SupabaseClient } from '@supabase/supabase-js';
-import { CreateUserInput } from './dto/create-user.input';
+import { PostgrestSingleResponse, SupabaseClient } from '@supabase/supabase-js';
 import { UpdateUserInput } from './dto/update-user.input';
 
 @Injectable()
@@ -10,12 +9,40 @@ export class UserService {
   public constructor(
     private readonly supabaseClient: SupabaseClient<HiveDatabase>,
   ) {}
-  public async create(createUserInput: CreateUserInput, userId: string) {
+  public async create(createUserInput: TablesInsert<'users'>) {
     try {
-      return this.supabaseClient
-        .from('users')
-        .insert({ ...createUserInput, id: userId })
-        .select();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const {
+        data,
+        error,
+      }: PostgrestSingleResponse<{ data: Tables<'users'> }[]> =
+        await this.supabaseClient
+          .from('users')
+          .insert<TablesInsert<'users'>>({
+            avatar_url: createUserInput.avatar_url,
+            billing_address: createUserInput.billing_address,
+            full_name: createUserInput.full_name,
+            id: createUserInput.id,
+            payment_method: createUserInput.payment_method,
+          })
+          .select();
+
+      if (error != null) {
+        console.log('supabase create user error', error);
+        throw new HttpException(
+          {
+            error: 'Error Creating User',
+            status: HttpStatus.BAD_REQUEST,
+          },
+          HttpStatus.BAD_REQUEST,
+          {
+            cause: error,
+          },
+        );
+      } else {
+        console.log('supabase create user ', data);
+        return data;
+      }
     } catch (error) {
       throw new HttpException(
         {

@@ -4,10 +4,13 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky",
-    "start:api": "npx nx run hive-builder-api:serve:development ",
+    "start:api": "cross-env NODE_ENV=dev npx nx run hive-builder-api:serve ",
+    "start:api:prod": "cross-env NODE_ENV=prod npx nx run hive-builder-api:serve ",
     "db:start": "npx nx run hive-db:start ",
     "db:stop": "npx nx run hive-db:stop ",
-    "gen:db:types": " npx nx run hive-db:gen:db:types"
+    "gen:db:types": " npx nx run hive-db:gen:db:types",
+    "diff:db": "npx nx run hive-db:diff ",
+    "reset:db": "npx nx run hive-db:reset "
   },
   "private": true,
   "dependencies": {
@@ -67,7 +70,7 @@
     "@nx/eslint-plugin": "19.5.7",
     "@nx/jest": "19.5.7",
     "@nx/js": "19.5.7",
-    "@nx/nest": "^19.5.7",
+    "@nx/nest": "19.5.7",
     "@nx/node": "19.5.7",
     "@nx/playwright": "19.5.7",
     "@nx/web": "19.5.7",
@@ -89,6 +92,7 @@
     "autoprefixer": "^10.4.0",
     "commitlint-config-nx-scopes": "^18.3.0",
     "conventional-changelog-atom": "^4.0.0",
+    "cross-env": "^7.0.3",
     "esbuild": "^0.19.2",
     "eslint": "~8.57.0",
     "eslint-config-prettier": "^9.0.0",

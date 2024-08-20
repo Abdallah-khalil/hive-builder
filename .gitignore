@@ -43,3 +43,4 @@ Thumbs.db
 
 .angular
 /.env
+/apps/hive-builder-api/src/app/schema.gql

@@ -12,12 +12,16 @@ import { config } from './config';
   controllers: [],
   imports: [
     ConfigModule.forRoot({
+      envFilePath: `env/.env.${process.env.NODE_ENV}`,
       isGlobal: true,
       load: [config],
     }),
 
     GraphQLModule.forRoot<ApolloDriverConfig>({
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      autoSchemaFile: join(
+        process.cwd(),
+        'apps/hive-builder-api/src/app/schema.gql',
+      ),
       driver: ApolloDriver,
       include: [AuthSupabaseModule, UserModule],
       playground: true,
@@ -29,7 +33,7 @@ import { config } from './config';
 
       useFactory: (configService: ConfigService) => {
         return {
-          supabaseKey: configService.get<string>('supabaseKey') ?? '',
+          supabaseKey: configService.get<string>('supabaseServiceKey') ?? '',
           supabaseUrl: configService.get<string>('supabaseUrl') ?? '',
         };
       },

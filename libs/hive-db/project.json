@@ -49,6 +49,21 @@
         "command": "npx supabase db pull  --schema auth,storage",
         "cwd": "libs/hive-db"
       }
+    },
+    "diff": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx supabase db diff -f {args.diffName} ",
+        "cwd": "libs/hive-db"
+      }
+    },
+
+    "reset": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx supabase db reset ",
+        "cwd": "libs/hive-db"
+      }
     }
   }
 }

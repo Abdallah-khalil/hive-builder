@@ -1,5 +1,7 @@
+import { TablesInsert } from '@hive-builder/hive-db';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { AuthResponse, SupabaseClient } from '@supabase/supabase-js';
+import { CreateUserInput } from '../user/dto/create-user.input';
 import { UserService } from '../user/user.nest.service';
 import { SignupInput } from './dto/signup.input';
 
@@ -12,25 +14,39 @@ export class AuthSupabaseService {
 
   public async signup(signupInput: SignupInput) {
     try {
-      const supabaseAuthResponse: AuthResponse =
+      const { error, data }: AuthResponse =
         await this.supabaseClient.auth.signUp({
           email: signupInput.email,
           password: signupInput.password,
           phone: signupInput.phone,
         });
 
-      if (supabaseAuthResponse.data?.user) {
-        await this.userService.create(
+      if (error) {
+        console.log('supabase error', error);
+
+        throw new HttpException(
           {
-            avatar_url: signupInput.avatar_url ?? '',
-            billing_address: signupInput.billing_address ?? '',
-            full_name: signupInput.full_name ?? '',
+            error: 'Signup Error',
+            status: HttpStatus.NOT_ACCEPTABLE,
           },
-          supabaseAuthResponse.data.user.id,
+          HttpStatus.NOT_ACCEPTABLE,
+          {
+            cause: error,
+          },
         );
       }
 
-      return supabaseAuthResponse.data.session;
+      if (data?.user !== null) {
+        console.log('Supabase auth user has been added', data.user);
+
+        const userToCreate: TablesInsert<'users'> =
+          CreateUserInput.mapToSupabase(signupInput, data.user.id);
+
+        console.log('userToCreate', userToCreate);
+        await this.userService.create(userToCreate);
+      }
+
+      return data.session;
     } catch (error) {
       throw new HttpException(
         {

@@ -6,7 +6,7 @@ export interface SupabaseConfig<
   TSchemaName extends string &
     keyof TDatabase = 'public' extends keyof TDatabase
     ? 'public'
-    : string & keyof TDatabase
+    : string & keyof TDatabase,
 > {
   supabaseUrl: string;
   supabaseKey: string;
@@ -43,7 +43,7 @@ export class SupabaseCoreModuleInjectionSymbols {
 }
 
 export function isNestSupabaseConfigFactoryAsyncOptions(
-  value: NestSupabaseConfigAsync
+  value: NestSupabaseConfigAsync,
 ): value is NestSupabaseConfigFactoryAsyncOptions {
   return (
     (value as NestSupabaseConfigFactoryAsyncOptions).useFactory !== undefined

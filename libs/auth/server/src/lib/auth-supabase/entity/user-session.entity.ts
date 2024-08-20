@@ -1,25 +1,26 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { AuthUser } from '@supabase/supabase-js';
+import { User } from '../../user/entities/user.entity';
 
 @ObjectType()
 export class UserSession {
   @Field(() => String, {
     description: 'image url for the profile',
-    name: 'avatarUrl',
+    name: 'accessToken',
     nullable: true,
   })
   public access_token!: string | null;
 
   @Field(() => String, {
     description: 'billing address',
-    name: 'billingAddress',
+    name: 'refreshToken',
     nullable: true,
   })
   public refresh_token!: string | null;
 
-  @Field(() => String, {
+  @Field(() => User, {
     description: 'full name',
-    name: 'fullName',
+    name: 'user',
     nullable: true,
   })
   public user!: AuthUser;
