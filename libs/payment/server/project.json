@@ -1,0 +1,16 @@
+{
+  "name": "payment-server",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/payment/server/src",
+  "projectType": "library",
+  "tags": ["platform:server", "scope:payment"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/payment/server/jest.config.ts"
+      }
+    }
+  }
+}
