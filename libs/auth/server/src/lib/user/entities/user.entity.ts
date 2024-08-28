@@ -36,18 +36,4 @@ export class User {
     nullable: true,
   })
   public payment_method!: string | null;
-
-  @Field(() => String, {
-    description: 'email',
-    name: 'email',
-    nullable: true,
-  })
-  public email!: string;
-
-  @Field(() => String, {
-    description: 'phone number',
-    name: 'phoneNumber',
-    nullable: true,
-  })
-  public phone!: string;
 }

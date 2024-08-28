@@ -179,14 +179,7 @@
           "warn",
           { "argsIgnorePattern": "^_" }
         ],
-        "sort-keys": [
-          "error",
-          "asc",
-          {
-            "caseSensitive": false,
-            "natural": true
-          }
-        ],
+
         "@typescript-eslint/no-explicit-any": ["error"]
       }
     },

@@ -8,7 +8,7 @@ Run `nx build hive-db` to build the library.
 
 ### Running Supabase migrations
 
-`npm run diff:db -- --diffName=migrate-name-example`
+`npm run diff:db -- --diffName=migrate_name_example`
 
 ### Running Supabase types generation
 

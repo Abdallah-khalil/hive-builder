@@ -18,6 +18,13 @@ Run `npx nx serve hive-builder-portal` to start the development server. Happy co
 
 Run `npx nx build hive-builder-portal` to build the application. The build artifacts are stored in the output directory (e.g. `dist/` or `build/`), ready to be deployed.
 
+## Generating libraries
+
+### Server Libraries
+
+1- Via Nx Console > make sure you put the correct options mentioned in th next command
+2- Via CMD > run ` npx nx generate @nx/nest:library --name=payment-server --directory=payment --projectNameAndRootFormat=as-provided --setParserOptionsProject=true --tags=platform:server,scope:payment --no-interactive --dry-run`
+
 ## Running tasks
 
 To execute tasks with Nx use the following syntax:

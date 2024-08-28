@@ -1,10 +1,15 @@
 import { join } from 'path';
 
 import { AuthSupabaseModule, UserModule } from '@hive-builder/auth/server';
-import { SupabaseNestModule } from '@hive-builder/core-server';
+import {
+  HttpExceptionFilter,
+  SupabaseNestModule,
+} from '@hive-builder/core-server';
+import { StripeNestModule } from '@hive-builder/payment-server';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { APP_FILTER } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { config } from './config';
 
@@ -39,9 +44,18 @@ import { config } from './config';
       },
     }),
 
+    StripeNestModule,
     AuthSupabaseModule,
     UserModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_FILTER,
+      useFactory: (logger: Logger) => new HttpExceptionFilter(logger),
+      inject: [Logger],
+    },
+
+    Logger,
+  ],
 })
 export class AppModule {}

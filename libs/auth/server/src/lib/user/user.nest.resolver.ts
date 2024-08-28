@@ -1,5 +1,8 @@
+import { Tables } from '@hive-builder/hive-db';
+import { UseGuards } from '@nestjs/common';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 
+import { GqlAuthGuard } from '../auth-supabase/guards/gql-auth.nest.guard';
 import { UpdateUserInput } from './dto/update-user.input';
 import { User } from './entities/user.entity';
 import { UserService } from './user.nest.service';
@@ -8,18 +11,23 @@ import { UserService } from './user.nest.service';
 export class UserResolver {
   public constructor(private readonly userService: UserService) {}
 
-  @Query(() => [User], { name: 'user' })
-  public findAll() {
+  @UseGuards(GqlAuthGuard)
+  @Query(() => [User], { name: 'users' })
+  public async findAll() {
     return this.userService.findAll();
   }
 
   @Query(() => User, { name: 'user' })
-  public findOne(@Args('id', { type: () => Int }) id: number) {
+  public async findOne(@Args('id', { type: () => Int }) id: number): Promise<{
+    data: Tables<'users'>;
+  } | null> {
     return this.userService.findOne(id);
   }
 
   @Mutation(() => User)
-  public updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
+  public async updateUser(
+    @Args('updateUserInput') updateUserInput: UpdateUserInput,
+  ) {
     return this.userService.update(updateUserInput.id, updateUserInput);
   }
 
