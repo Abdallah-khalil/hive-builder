@@ -3,6 +3,7 @@ import { join } from 'path';
 import { AuthSupabaseModule, UserModule } from '@hive-builder/auth/server';
 import {
   HttpExceptionFilter,
+  LoggerNestModule,
   SupabaseNestModule,
 } from '@hive-builder/core-server';
 import { StripeNestModule } from '@hive-builder/payment-server';
@@ -47,6 +48,7 @@ import { config } from './config';
     StripeNestModule,
     AuthSupabaseModule,
     UserModule,
+    LoggerNestModule,
   ],
   providers: [
     {

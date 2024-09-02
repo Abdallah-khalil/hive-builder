@@ -25,6 +25,9 @@ Run `npx nx build hive-builder-portal` to build the application. The build artif
 1- Via Nx Console > make sure you put the correct options mentioned in th next command
 2- Via CMD > run ` npx nx generate @nx/nest:library --name=payment-server --directory=payment --projectNameAndRootFormat=as-provided --setParserOptionsProject=true --tags=platform:server,scope:payment --no-interactive --dry-run`
 
+#### generating server ( modules, resources, services .. ) with Nx
+ > Make sure to add a suffix for the name for example ` npx nx generate @nx/nest:module --name=logger.nest --nameAndDirectoryFormat=as-provided --no-interactive --dry-run `
+
 ## Running tasks
 
 To execute tasks with Nx use the following syntax:

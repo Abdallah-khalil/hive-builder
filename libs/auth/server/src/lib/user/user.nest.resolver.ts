@@ -18,9 +18,9 @@ export class UserResolver {
   }
 
   @Query(() => User, { name: 'user' })
-  public async findOne(@Args('id', { type: () => Int }) id: number): Promise<{
-    data: Tables<'users'>;
-  } | null> {
+  public async findOne(
+    @Args('id', { type: () => String }) id: string,
+  ): Promise<Tables<'users'> | null> {
     return this.userService.findOne(id);
   }
 

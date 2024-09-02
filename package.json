@@ -4,13 +4,13 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky",
-    "start:api": "cross-env NODE_ENV=dev npx nx run hive-builder-api:serve ",
-    "start:api:prod": "cross-env NODE_ENV=prod npx nx run hive-builder-api:serve ",
-    "db:start": "npx nx run hive-db:start ",
+    "api:start": "cross-env NODE_ENV=dev npx nx run hive-builder-api:serve",
+    "api:prod:start": "cross-env NODE_ENV=prod npx nx run hive-builder-api:serve",
+    "db:start": "npx nx run hive-db:start",
     "db:stop": "npx nx run hive-db:stop ",
     "gen:db:types": " npx nx run hive-db:gen:db:types",
-    "diff:db": "npx nx run hive-db:diff ",
-    "reset:db": "npx nx run hive-db:reset "
+    "db:diff": "npx nx run hive-db:diff",
+    "db:reset": "npx nx run hive-db:reset"
   },
   "private": true,
   "dependencies": {

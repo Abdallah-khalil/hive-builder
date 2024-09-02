@@ -1,17 +1,15 @@
+import { ErrorHandlerService } from '@hive-builder/core-server';
 import { HiveDatabase, Tables, TablesInsert } from '@hive-builder/hive-db';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
-import {
-  PostgrestError,
-  PostgrestSingleResponse,
-  SupabaseClient,
-} from '@supabase/supabase-js';
+import { PostgrestSingleResponse, SupabaseClient } from '@supabase/supabase-js';
 import { UpdateUserInput } from './dto/update-user.input';
 
 @Injectable()
 export class UserService {
   public constructor(
     private readonly supabaseClient: SupabaseClient<HiveDatabase>,
+    private readonly errorHandler: ErrorHandlerService,
   ) {}
 
   public async create(
@@ -20,21 +18,14 @@ export class UserService {
     const { data, error }: PostgrestSingleResponse<Tables<'users'>> =
       await this.supabaseClient
         .from('users')
-        .insert<TablesInsert<'users'>>({
-          avatar_url: createUserInput.avatar_url,
-          billing_address: createUserInput.billing_address,
-          full_name: createUserInput.full_name,
-          id: createUserInput.id,
-          payment_method: createUserInput.payment_method,
-        })
+        .insert<TablesInsert<'users'>>(createUserInput)
         .select('*')
         .single();
 
     if (error != null) {
-      this.handleError(error);
+      this.errorHandler.handleError(error);
     }
 
-    console.log('supabase create user ', data);
     return data as Tables<'users'>;
   }
 
@@ -46,36 +37,35 @@ export class UserService {
       await this.supabaseClient.from('users').select();
 
     if (error != null) {
-      this.handleError(error);
+      this.errorHandler.handleError(error);
     }
 
     return data;
   }
 
-  public async findOne(id: number) {
-    const { data, error }: PostgrestSingleResponse<{ data: Tables<'users'> }> =
-      await this.supabaseClient.from('users').select().eq('id', id).single();
+  public async findOne(id: string) {
+    const { data, error }: PostgrestSingleResponse<Tables<'users'>> =
+      await this.supabaseClient.from('users').select('*').eq('id', id).single();
 
+    console.log(data);
     if (error != null) {
-      this.handleError(error);
+      this.errorHandler.handleError(error);
     }
 
-    return data;
+    return data as Tables<'users'>;
   }
 
   public async update(id: string, updateUserInput: UpdateUserInput) {
-    const {
-      data,
-      error,
-    }: PostgrestSingleResponse<{ data: Tables<'users'> }[]> =
+    const { data, error }: PostgrestSingleResponse<Tables<'users'>> =
       await this.supabaseClient
         .from('users')
         .update(updateUserInput)
         .eq('id', id)
-        .select();
+        .select()
+        .single();
 
     if (error != null) {
-      this.handleError(error);
+      this.errorHandler.handleError(error);
     }
 
     return data;
@@ -83,10 +73,5 @@ export class UserService {
 
   public remove(id: number) {
     return this.supabaseClient.from('users').delete().eq('id', id);
-  }
-
-  private handleError(error: PostgrestError) {
-    console.log('supabase create user error', error);
-    throw new HttpException(error?.message, HttpStatus.BAD_REQUEST);
   }
 }
