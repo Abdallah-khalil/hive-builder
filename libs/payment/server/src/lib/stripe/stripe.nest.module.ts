@@ -1,8 +1,9 @@
 import { StripeModule } from '@golevelup/nestjs-stripe';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { StripeProductWebhookService } from './stripe-product-webhook.service';
-import { StripeService } from './stripe.service';
+import { StripeProductModule } from '../stripe-product';
+import { StripeProductWebhookService } from './stripe-product-webhook.nest.service';
+import { StripeService } from './stripe.nest.service';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { StripeService } from './stripe.service';
         };
       },
     }),
+    StripeProductModule,
   ],
   providers: [StripeService, StripeProductWebhookService],
 })

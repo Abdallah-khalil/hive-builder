@@ -39,7 +39,7 @@
     "gen:db:types": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx supabase gen types --lang  typescript --linked > src/lib/hive-db.ts",
+        "command": "npx supabase gen types --lang  typescript --local  > src/lib/hive-db.ts",
         "cwd": "libs/hive-db"
       }
     },

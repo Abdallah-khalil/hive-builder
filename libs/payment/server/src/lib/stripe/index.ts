@@ -1,2 +1,2 @@
 export * from './stripe.nest.module';
-export * from './stripe.service';
+export * from './stripe.nest.service';

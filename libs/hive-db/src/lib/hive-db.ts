@@ -7,8 +7,7 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-export type HiveDatabase = {
+export interface HiveDatabase {
   graphql_public: {
     Tables: {
       [_ in never]: never;
@@ -59,7 +58,7 @@ export type HiveDatabase = {
           },
         ];
       };
-      prices: {
+      stripe_product_prices: {
         Row: {
           active: boolean | null;
           currency: string | null;
@@ -110,12 +109,12 @@ export type HiveDatabase = {
             foreignKeyName: 'prices_product_id_fkey';
             columns: ['product_id'];
             isOneToOne: false;
-            referencedRelation: 'products';
+            referencedRelation: 'stripe_products';
             referencedColumns: ['id'];
           },
         ];
       };
-      products: {
+      stripe_products: {
         Row: {
           active: boolean | null;
           description: string | null;
@@ -123,6 +122,7 @@ export type HiveDatabase = {
           image: string | null;
           metadata: Json | null;
           name: string | null;
+          stripe_product_id: string;
         };
         Insert: {
           active?: boolean | null;
@@ -131,6 +131,7 @@ export type HiveDatabase = {
           image?: string | null;
           metadata?: Json | null;
           name?: string | null;
+          stripe_product_id: string;
         };
         Update: {
           active?: boolean | null;
@@ -139,6 +140,7 @@ export type HiveDatabase = {
           image?: string | null;
           metadata?: Json | null;
           name?: string | null;
+          stripe_product_id?: string;
         };
         Relationships: [];
       };
@@ -203,7 +205,7 @@ export type HiveDatabase = {
             foreignKeyName: 'subscriptions_price_id_fkey';
             columns: ['price_id'];
             isOneToOne: false;
-            referencedRelation: 'prices';
+            referencedRelation: 'stripe_product_prices';
             referencedColumns: ['id'];
           },
           {
@@ -271,7 +273,7 @@ export type HiveDatabase = {
       [_ in never]: never;
     };
   };
-};
+}
 
 type PublicSchema = HiveDatabase[Extract<keyof HiveDatabase, 'public'>];
 
