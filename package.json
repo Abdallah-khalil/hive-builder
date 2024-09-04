@@ -10,7 +10,8 @@
     "db:stop": "npx nx run hive-db:stop ",
     "gen:db:types": " npx nx run hive-db:gen:db:types",
     "db:diff": "npx nx run hive-db:diff",
-    "db:reset": "npx nx run hive-db:reset"
+    "db:reset": "npx nx run hive-db:reset",
+    "stripe:listen": "stripe listen --forward-to localhost:3000/stripe/webhook "
   },
   "private": true,
   "dependencies": {

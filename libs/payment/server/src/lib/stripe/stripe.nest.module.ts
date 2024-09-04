@@ -2,6 +2,7 @@ import { StripeModule } from '@golevelup/nestjs-stripe';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { StripeProductModule } from '../stripe-product';
+import { StripeProductPriceModule } from '../stripe-product-price';
 import { StripeProductWebhookService } from './stripe-product-webhook.nest.service';
 import { StripeService } from './stripe.nest.service';
 
@@ -28,6 +29,7 @@ import { StripeService } from './stripe.nest.service';
       },
     }),
     StripeProductModule,
+    StripeProductPriceModule,
   ],
   providers: [StripeService, StripeProductWebhookService],
 })

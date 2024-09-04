@@ -9,19 +9,22 @@ import { Injectable } from '@nestjs/common';
 import { PostgrestSingleResponse, SupabaseClient } from '@supabase/supabase-js';
 
 @Injectable()
-export class StripeProductService {
+export class StripeProductPriceService {
   public constructor(
     private readonly supabaseClient: SupabaseClient<HiveDatabase>,
     private readonly errorHandler: ErrorHandlerService,
   ) {}
 
   public async create(
-    createProductInput: TablesInsert<'stripe_products'>,
-  ): Promise<Tables<'stripe_products'>> {
-    const { data, error }: PostgrestSingleResponse<Tables<'stripe_products'>> =
+    createProductPriceInput: TablesInsert<'stripe_product_prices'>,
+  ): Promise<Tables<'stripe_product_prices'>> {
+    const {
+      data,
+      error,
+    }: PostgrestSingleResponse<Tables<'stripe_product_prices'>> =
       await this.supabaseClient
-        .from('stripe_products')
-        .insert<TablesInsert<'stripe_products'>>(createProductInput)
+        .from('stripe_product_prices')
+        .insert<TablesInsert<'stripe_product_prices'>>(createProductPriceInput)
         .select('*')
         .single();
 
@@ -29,15 +32,15 @@ export class StripeProductService {
       this.errorHandler.handleError(error);
     }
 
-    return data as Tables<'stripe_products'>;
+    return data as Tables<'stripe_product_prices'>;
   }
 
   public async findAll() {
     const {
       data,
       error,
-    }: PostgrestSingleResponse<{ data: Tables<'stripe_products'> }[]> =
-      await this.supabaseClient.from('stripe_products').select();
+    }: PostgrestSingleResponse<{ data: Tables<'stripe_product_prices'> }[]> =
+      await this.supabaseClient.from('stripe_product_prices').select();
 
     if (error != null) {
       this.errorHandler.handleError(error);
@@ -50,11 +53,17 @@ export class StripeProductService {
     return `This action returns a #${id} stripeProduct`;
   }
 
-  public async update(id: string, product: TablesUpdate<'stripe_products'>) {
-    const { data, error }: PostgrestSingleResponse<Tables<'stripe_products'>> =
+  public async update(
+    id: string,
+    productPrice: TablesUpdate<'stripe_product_prices'>,
+  ) {
+    const {
+      data,
+      error,
+    }: PostgrestSingleResponse<Tables<'stripe_product_prices'>> =
       await this.supabaseClient
-        .from('stripe_products')
-        .update(product)
+        .from('stripe_product_prices')
+        .update(productPrice)
         .eq('id', id)
         .select()
         .single();
@@ -67,6 +76,9 @@ export class StripeProductService {
   }
 
   public remove(id: string) {
-    return this.supabaseClient.from('stripe_products').delete().eq('id', id);
+    return this.supabaseClient
+      .from('stripe_product_prices')
+      .delete()
+      .eq('id', id);
   }
 }

@@ -6,11 +6,16 @@ import {
   CreateStripeProductInput,
   StripeProductService,
 } from '../stripe-product';
+import {
+  CreateStripeProductPriceInput,
+  StripeProductPriceService,
+} from '../stripe-product-price';
 
 @Injectable()
 export class StripeProductWebhookService {
   public constructor(
     private readonly stripeProductService: StripeProductService,
+    private readonly stripeProductPriceService: StripeProductPriceService,
   ) {}
 
   @StripeWebhookHandler('product.created')
@@ -29,5 +34,33 @@ export class StripeProductWebhookService {
         evt.data.object as Stripe.Product,
       );
     await this.stripeProductService.update(product.id, product);
+  }
+
+  @StripeWebhookHandler('product.deleted')
+  public async handleProductDeleted(evt: Stripe.ProductDeletedEvent) {
+    await this.stripeProductService.remove(evt.data.object.id);
+  }
+
+  @StripeWebhookHandler('price.created')
+  public async handlePriceCreated(evt: Stripe.PriceCreatedEvent) {
+    const productPrice: TablesInsert<'stripe_product_prices'> =
+      CreateStripeProductPriceInput.mapStripeProductPrice(
+        evt.data.object as Stripe.Price,
+      );
+    await this.stripeProductPriceService.create(productPrice);
+  }
+
+  @StripeWebhookHandler('price.updated')
+  public async handlePriceUpdated(evt: Stripe.PriceUpdatedEvent) {
+    const productPrice: TablesInsert<'stripe_product_prices'> =
+      CreateStripeProductPriceInput.mapStripeProductPrice(
+        evt.data.object as Stripe.Price,
+      );
+    await this.stripeProductPriceService.update(productPrice.id, productPrice);
+  }
+
+  @StripeWebhookHandler('price.deleted')
+  public async handlePriceDeleted(evt: Stripe.PriceDeletedEvent) {
+    await this.stripeProductPriceService.remove(evt.data.object.id);
   }
 }
