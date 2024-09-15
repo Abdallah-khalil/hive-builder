@@ -1,2 +1,3 @@
 export * from './lib/logger';
-export * from './lib/nest-supabase';
+
+export * from './lib/supabase-server';

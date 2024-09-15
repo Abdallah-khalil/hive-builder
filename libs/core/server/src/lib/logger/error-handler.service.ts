@@ -5,8 +5,8 @@ import { AuthError, PostgrestError } from '@supabase/supabase-js';
 export class ErrorHandlerService {
   public constructor(private readonly logger: Logger) {}
 
-  public handleError(error: PostgrestError | AuthError) {
-    this.logger.error('supabase create user error', error);
+  public handleError(error: PostgrestError | AuthError | Error) {
+    this.logger.error('supabase error', error);
     throw new HttpException(error?.message, HttpStatus.BAD_REQUEST);
   }
 }

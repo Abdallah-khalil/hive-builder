@@ -130,6 +130,48 @@
       "base": "graphql",
       "color": "#e63dae",
       "fileExtensions": ["queries.ts", "graphql"]
+    },
+    {
+      "name": "angular-component",
+      "base": "angular",
+      "color": "#4C1BD1",
+      "fileExtensions": ["component.ts"]
+    },
+    {
+      "name": "angular-routes",
+      "base": "angular",
+      "color": "#0DD158",
+      "fileExtensions": ["routes.ts"]
+    },
+    {
+      "name": "angular-modules",
+      "base": "angular",
+      "color": "#e53935",
+      "fileExtensions": ["module.ts"]
+    },
+    {
+      "name": "angular-services",
+      "base": "angular",
+      "color": "#fdca27",
+      "fileExtensions": ["service.ts"]
+    },
+    {
+      "name": "angular-resolver",
+      "base": "angular",
+      "color": "#5c6bc0",
+      "fileExtensions": ["resolver.ts"]
+    },
+    {
+      "name": "angular-filters",
+      "base": "angular",
+      "color": "#fb7042",
+      "fileExtensions": ["filter.ts"]
+    },
+    {
+      "name": "angular-pipes",
+      "base": "angular",
+      "color": "#1a897b",
+      "fileExtensions": ["pipe.ts"]
     }
   ],
   "typescript.tsdk": "node_modules\\typescript\\lib",

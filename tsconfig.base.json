@@ -35,6 +35,7 @@
       "@hive-builder/core-server": ["libs/core/server/src/index.ts"],
       "@hive-builder/hive-db": ["libs/hive-db/src/index.ts"],
       "@hive-builder/payment-server": ["libs/payment/server/src/index.ts"],
+      "@hive-builder/util": ["libs/core/util/src/index.ts"],
       "@spartan-ng/ui-typography-helm": [
         "libs/shared/web-ui/ui-typography-helm/src/index.ts"
       ]

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 export type Json =
   | string
   | number
@@ -7,7 +8,7 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
-export interface HiveDatabase {
+export type HiveDatabase = {
   graphql_public: {
     Tables: {
       [_ in never]: never;
@@ -35,29 +36,6 @@ export interface HiveDatabase {
   };
   public: {
     Tables: {
-      customers: {
-        Row: {
-          id: string;
-          stripe_customer_id: string | null;
-        };
-        Insert: {
-          id: string;
-          stripe_customer_id?: string | null;
-        };
-        Update: {
-          id?: string;
-          stripe_customer_id?: string | null;
-        };
-        Relationships: [
-          {
-            foreignKeyName: 'customers_id_fkey';
-            columns: ['id'];
-            isOneToOne: true;
-            referencedRelation: 'users';
-            referencedColumns: ['id'];
-          },
-        ];
-      };
       stripe_product_prices: {
         Row: {
           active: boolean | null;
@@ -224,6 +202,7 @@ export interface HiveDatabase {
           full_name: string | null;
           id: string;
           payment_method: Json | null;
+          stripe_customer_id: string | null;
         };
         Insert: {
           avatar_url?: string | null;
@@ -231,6 +210,7 @@ export interface HiveDatabase {
           full_name?: string | null;
           id: string;
           payment_method?: Json | null;
+          stripe_customer_id?: string | null;
         };
         Update: {
           avatar_url?: string | null;
@@ -238,6 +218,7 @@ export interface HiveDatabase {
           full_name?: string | null;
           id?: string;
           payment_method?: Json | null;
+          stripe_customer_id?: string | null;
         };
         Relationships: [
           {
@@ -273,7 +254,7 @@ export interface HiveDatabase {
       [_ in never]: never;
     };
   };
-}
+};
 
 type PublicSchema = HiveDatabase[Extract<keyof HiveDatabase, 'public'>];
 

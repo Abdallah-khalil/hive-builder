@@ -36,4 +36,11 @@ export class User {
     nullable: true,
   })
   public payment_method!: string | null;
+
+  @Field(() => String, {
+    description: 'stripe customer id',
+    name: 'stripeCustomerId',
+    nullable: true,
+  })
+  public stripe_customer_id!: string | null;
 }

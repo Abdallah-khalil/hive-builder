@@ -1,10 +1,12 @@
 import { StripeModule } from '@golevelup/nestjs-stripe';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { StripeProductModule } from '../stripe-product';
-import { StripeProductPriceModule } from '../stripe-product-price';
+import { ProductModule } from '../product';
+import { ProductPriceModule } from '../product-price';
+import { SubscriptionModule } from '../subscription';
+import { StripeCustomerNestService } from './stripe-customer.nest.service';
 import { StripeProductWebhookService } from './stripe-product-webhook.nest.service';
-import { StripeService } from './stripe.nest.service';
+import { StripeSubscriptionNestService } from './stripe-subscription.nest.service';
 
 @Module({
   imports: [
@@ -14,7 +16,9 @@ import { StripeService } from './stripe.nest.service';
 
       useFactory: (configService: ConfigService) => {
         return {
-          apiKey: configService.get<string>('stripeSecretKey') ?? '',
+          apiKey: configService.get<string>('stripeApiKey') ?? '',
+
+          typescript: true,
           webhookConfig: {
             requestBodyProperty: 'rawBody',
             stripeSecrets: {
@@ -28,9 +32,15 @@ import { StripeService } from './stripe.nest.service';
         };
       },
     }),
-    StripeProductModule,
-    StripeProductPriceModule,
+    ProductModule,
+    ProductPriceModule,
+    SubscriptionModule,
   ],
-  providers: [StripeService, StripeProductWebhookService],
+  providers: [
+    StripeProductWebhookService,
+    StripeCustomerNestService,
+    StripeSubscriptionNestService,
+  ],
+  exports: [StripeCustomerNestService, StripeSubscriptionNestService],
 })
 export class StripeNestModule {}

@@ -31,6 +31,13 @@ export class CreateUserInput {
   })
   public paymentMethod?: string | null;
 
+  @Field(() => String, {
+    description: 'stripe customer id',
+    name: 'stripeCustomerId',
+    nullable: true,
+  })
+  public stripeCustomerId?: string | null;
+
   public static mapToSupabase(
     createUserInput: CreateUserInput,
     userId: string,
@@ -41,6 +48,7 @@ export class CreateUserInput {
       full_name: createUserInput.fullName ?? null,
       id: userId ?? null,
       payment_method: createUserInput.paymentMethod ?? null,
+      stripe_customer_id: createUserInput.stripeCustomerId ?? null,
     };
   }
 }

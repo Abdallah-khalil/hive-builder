@@ -8,7 +8,7 @@
     "api:prod:start": "cross-env NODE_ENV=prod npx nx run hive-builder-api:serve",
     "db:start": "npx nx run hive-db:start",
     "db:stop": "npx nx run hive-db:stop ",
-    "gen:db:types": " npx nx run hive-db:gen:db:types",
+    "db:gen:types": " npx nx run hive-db:gen:db:types",
     "db:diff": "npx nx run hive-db:diff",
     "db:reset": "npx nx run hive-db:reset",
     "stripe:listen": "stripe listen --forward-to localhost:3000/stripe/webhook "
@@ -38,6 +38,7 @@
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.0.2",
     "@spartan-ng/ui-core": "^0.0.1-alpha.353",
+    "@supabase/ssr": "^0.5.1",
     "@supabase/supabase-js": "^2.45.1",
     "bcryptjs": "^2.4.3",
     "clsx": "^1.2.1",

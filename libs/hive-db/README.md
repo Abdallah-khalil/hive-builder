@@ -2,26 +2,26 @@
 
 This library was generated with [Nx](https://nx.dev).
 
-## Building
+## Starting Supbase local instance
 
-Run `nx build hive-db` to build the library.
+Run `npm run db:start` .
+
+## Stopping Supbase local instance
+
+Run `npm run db:stop` .
 
 ### Running Supabase migrations
 
-`npm run diff:db -- --diffName=migrate_name_example`
+`npm run db:diff -- --diffName=migrate_name_example`
 
 ### Running Supabase types generation
 
-`npm run gen:db:types`
+`npm run db:gen:types`
 
 ### Running Supabase linking
 
 `npm run link --project-ref=project-ref-example` Then add in your database password
 
-### Running Supabase pull
-
-`npm run pull`
-
 ### Running Supabase reset
 
-`npm run reset`
+`npm run db:reset`
