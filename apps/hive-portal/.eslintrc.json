@@ -4,6 +4,9 @@
   "overrides": [
     {
       "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["apps/hive-portal/tsconfig.*?.json"]
+      },
       "extends": [
         "plugin:@nx/angular",
         "plugin:@angular-eslint/template/process-inline-templates"
@@ -13,7 +16,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
+            "prefix": "hv",
             "style": "camelCase"
           }
         ],
@@ -21,7 +24,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": "hv",
             "style": "kebab-case"
           }
         ]

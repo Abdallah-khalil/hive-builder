@@ -5,8 +5,10 @@ export const appRoutes: Route[] = [
   {
     path: 'auth',
     component: AuthLayoutComponent,
-    loadChildren: () =>
-      import('@hive-builder/auth-feature-web').then((m) => m.authWebRoutes),
+    loadChildren: async () =>
+      import('@hive-builder/auth-feature-web').then(
+        (m: { authWebRoutes: Route[] }) => m.authWebRoutes,
+      ),
   },
 
   // Fallback when no prior routes is matched

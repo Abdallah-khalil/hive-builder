@@ -1,33 +1,33 @@
 {
-  "name": "hive-builder-portal",
+  "name": "hive-portal",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "app",
-  "sourceRoot": "apps/hive-builder-portal/src",
-  "tags": [],
+  "prefix": "hv",
+  "sourceRoot": "apps/hive-portal/src",
+  "tags": ["type:app", "platform:web"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/hive-builder-portal",
-        "index": "apps/hive-builder-portal/src/index.html",
-        "browser": "apps/hive-builder-portal/src/main.ts",
+        "outputPath": "dist/apps/hive-portal",
+        "index": "apps/hive-portal/src/index.html",
+        "browser": "apps/hive-portal/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/hive-builder-portal/tsconfig.app.json",
+        "tsConfig": "apps/hive-portal/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/hive-builder-portal/public"
+            "input": "apps/hive-portal/public"
           }
         ],
-        "styles": ["apps/hive-builder-portal/src/styles.scss"],
+        "styles": ["apps/hive-portal/src/styles.scss"],
         "scripts": [],
-        "server": "apps/hive-builder-portal/src/main.server.ts",
+        "server": "apps/hive-portal/src/main.server.ts",
         "prerender": false,
         "ssr": {
-          "entry": "apps/hive-builder-portal/server.ts"
+          "entry": "apps/hive-portal/server.ts"
         }
       },
       "configurations": {
@@ -58,18 +58,21 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "hive-builder-portal:build:production"
+          "buildTarget": "hive-portal:build:production"
         },
         "development": {
-          "buildTarget": "hive-builder-portal:build:development"
+          "buildTarget": "hive-portal:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/hive-portal/proxy.conf.json"
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "hive-builder-portal:build"
+        "buildTarget": "hive-portal:build"
       }
     },
     "lint": {
@@ -79,7 +82,15 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/hive-builder-portal/jest.config.ts"
+        "jestConfig": "apps/hive-portal/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "hive-portal:build",
+        "staticFilePath": "dist/apps/hive-portal/browser",
+        "spa": true
       }
     }
   }

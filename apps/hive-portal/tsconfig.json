@@ -27,11 +27,6 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true,
-    "enableIvy": true,
-    "fullTemplateTypeCheck": true,
-    "disableTypeScriptVersionCheck": true,
-    "annotationsAs": "static fields",
-    "compilationMode": "full"
+    "strictTemplates": true
   }
 }

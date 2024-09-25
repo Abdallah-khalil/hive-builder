@@ -1,9 +1,8 @@
-/* eslint-disable */
 export default {
-  displayName: 'hive-builder-portal',
+  displayName: 'hive-portal',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/hive-builder-portal',
+  coverageDirectory: '../../coverage/apps/hive-portal',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
