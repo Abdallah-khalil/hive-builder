@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "prepare": "husky",
-    "start": "npx nx run hive-builder-portal:serve:development -- --open",
+    "start": "npx nx run hive-portal:serve:development -- --open",
     "api:start": "cross-env NODE_ENV=dev npx nx run hive-builder-api:serve",
     "api:prod:start": "cross-env NODE_ENV=prod npx nx run hive-builder-api:serve",
     "db:start": "npx nx run hive-db:start",
@@ -12,10 +12,7 @@
     "db:gen:types": " npx nx run hive-db:gen:db:types",
     "db:diff": "npx nx run hive-db:diff",
     "db:reset": "npx nx run hive-db:reset",
-    "stripe:listen": "stripe listen --forward-to localhost:3000/stripe/webhook ",
-    "ssr:serve": "npx nx run hive-portal:serve-ssr",
-    "ssr:build": "npx nx run hive-portal:build:production,ssr",
-    "ssr:preview": "npx nx run hive-portal:preview-ssr"
+    "stripe:listen": "stripe listen --forward-to localhost:3000/stripe/webhook "
   },
   "private": true,
   "dependencies": {

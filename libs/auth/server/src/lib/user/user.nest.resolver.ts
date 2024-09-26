@@ -35,7 +35,7 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  public removeUser(
+  public async removeUser(
     @Args('id', { type: () => String }) id: string,
     @Context() ctx: { req: Request; res: Response },
   ) {
